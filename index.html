@@ -1179,7 +1179,7 @@
             <p class="section-subtitle fade-in">参加費無料｜オンライン開催｜所要時間 約60分</p>
             <div class="form-outer">
                 <div class="form-card fade-in">
-                    <form action="#" method="post">
+                    <form id="seminar-form">
                         <div class="form-group">
                             <label>お名前 <span class="req">必須</span></label>
                             <input type="text" name="name" required placeholder="例：田中 太郎">
@@ -1206,11 +1206,15 @@
                             <label>診断士としての経験年数</label>
                             <select name="experience">
                                 <option value="">選択してください</option>
-                                <option value="未登録">未登録（勉強中）</option>
-                                <option value="1-3">1-3年</option>
-                                <option value="4-7">4-7年</option>
-                                <option value="8-10">8-10年</option>
-                                <option value="11+">11年以上</option>
+                                <option value="勉強中">勉強中</option>
+                                <option value="1次試験合格">1次試験まで合格</option>
+                                <option value="2次試験合格">2次試験まで合格</option>
+                                <option value="中小企業大学校在学中">中小企業大学校在学中</option>
+                                <option value="実務補習">これから実務補習を履修 / 履修中</option>
+                                <option value="1-3年">登録済み 1-3年</option>
+                                <option value="4-7年">登録済み 4-7年</option>
+                                <option value="8-10年">登録済み 8-10年</option>
+                                <option value="11年以上">登録済み 11年以上</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1310,6 +1314,49 @@
                 }
             });
         });
+        // フォーム送信処理
+        var GAS_URL = 'https://script.google.com/macros/s/AKfycbyyHHrTLAkTcre6Ow4c-t8gL0vAH4uNgrC-PI3ysQgNBkiTdVtHSGJyjrmwBvxGo6K4/exec';
+
+        var form = document.getElementById('seminar-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                var btn = form.querySelector('.form-submit');
+                var originalText = btn.textContent;
+                btn.textContent = '送信中...';
+                btn.disabled = true;
+                btn.style.opacity = '0.6';
+
+                var formData = {
+                    name: form.querySelector('[name="name"]').value,
+                    email: form.querySelector('[name="email"]').value,
+                    phone: form.querySelector('[name="phone"]').value,
+                    date: form.querySelector('[name="date"]').value,
+                    experience: form.querySelector('[name="experience"]').value,
+                    position: form.querySelector('[name="position"]').value,
+                    interest: form.querySelector('[name="interest"]').value
+                };
+
+                fetch(GAS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                }).then(function() {
+                    form.innerHTML = '<div style="text-align:center; padding: 40px 0;">' +
+                        '<div style="font-size: 48px; margin-bottom: 16px;">&#10003;</div>' +
+                        '<h3 style="font-size: 24px; color: var(--primary); margin-bottom: 12px;">お申し込みありがとうございます</h3>' +
+                        '<p style="color: var(--text-light); font-size: 15px;">ご登録いただいたメールアドレスに<br>参加URLをお送りいたします。</p>' +
+                        '</div>';
+                }).catch(function() {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    alert('送信に失敗しました。お手数ですが、もう一度お試しください。');
+                });
+            });
+        }
     })();
     </script>
 </body>
