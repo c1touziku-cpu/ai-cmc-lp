@@ -406,104 +406,175 @@
         ============================================ */
         .chapter-hope {
             padding: 100px 0;
-            background: var(--bg-light);
+            background: var(--primary);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
         }
+        .chapter-hope::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(58,95,173,0.4) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .chapter-hope .section-title { color: var(--white); }
+        .chapter-hope .section-subtitle { color: rgba(255,255,255,0.9); }
+        .chapter-hope .section-label { background: rgba(255,255,255,0.15); color: var(--white); }
+
+        /* 数式エリア */
         .formula-wrap {
             display: flex;
             align-items: stretch;
             justify-content: center;
-            gap: 16px;
-            margin-bottom: 56px;
+            gap: 20px;
+            margin-bottom: 64px;
             flex-wrap: wrap;
+            position: relative;
         }
         .formula-card {
             flex: 1;
             min-width: 220px;
             max-width: 300px;
-            background: var(--white);
-            border-radius: 12px;
-            padding: 32px 24px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 36px 24px;
             text-align: center;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .formula-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
         }
         .formula-card .f-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 16px;
-            background: var(--bg-light);
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 32px;
+            border: 1px solid rgba(255,255,255,0.2);
         }
         .formula-card h4 {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
+            color: var(--white);
+            margin-bottom: 10px;
             line-height: 1.5;
         }
-        .formula-card p { font-size: 13px; color: var(--text-light); }
+        .formula-card p { font-size: 13px; color: rgba(255,255,255,0.7); }
         .formula-card.result {
-            border: 2px solid var(--primary);
-            background: linear-gradient(180deg, #f0f4ff, var(--white));
+            background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(212,175,55,0.08));
+            border: 1px solid rgba(212,175,55,0.5);
         }
+        .formula-card.result h4 { color: var(--gold); }
         .formula-op {
             display: flex;
             align-items: center;
             font-family: 'Poppins', sans-serif;
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 800;
-            color: var(--primary-light);
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(212,175,55,0.4);
         }
 
+        /* 理由カード */
         .reason-cards {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            margin-bottom: 56px;
+            margin-bottom: 64px;
+            counter-reset: reason;
         }
         .reason-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 32px 24px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-            border-left: 4px solid var(--primary);
-            transition: transform 0.3s ease;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 40px 28px 32px;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            counter-increment: reason;
+            opacity: 0;
+            transform: translateY(30px);
         }
-        .reason-card:hover { transform: translateY(-4px); }
+        .reason-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reason-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+            border-color: var(--gold);
+        }
+        .reason-card::before {
+            content: counter(reason, decimal-leading-zero);
+            position: absolute;
+            top: -18px;
+            left: 28px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--gold);
+            opacity: 0.5;
+            line-height: 1;
+        }
         .reason-card h4 {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 12px;
-            line-height: 1.5;
+            color: var(--white);
+            margin-bottom: 14px;
+            line-height: 1.6;
         }
         .reason-card p {
             font-size: 14px;
-            color: var(--text-light);
+            color: rgba(255,255,255,0.75);
             line-height: 1.8;
         }
 
         /* 希望メッセージ */
         .hope-message {
-            background: var(--blue-gradient);
-            border-radius: 12px;
-            padding: 48px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05));
+            border: 1px solid rgba(212,175,55,0.4);
+            border-radius: 16px;
+            padding: 52px;
             text-align: center;
             color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        .hope-message::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 50%);
+            animation: hopePulse 4s ease-in-out infinite;
+        }
+        @keyframes hopePulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
         }
         .hope-message p {
-            font-size: 21px;
+            font-size: 22px;
             font-weight: 700;
             line-height: 1.8;
+            position: relative;
         }
         .hope-message .sub {
             font-size: 15px;
             font-weight: 400;
             opacity: 0.8;
             margin-top: 16px;
+            position: relative;
         }
 
         /* ============================================
@@ -1292,6 +1363,24 @@
         document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(function(el) {
             observer.observe(el);
         });
+
+        // 理由カードの順次スライドインアニメーション
+        var reasonObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var cards = entry.target.querySelectorAll('.reason-card');
+                    cards.forEach(function(card, i) {
+                        setTimeout(function() {
+                            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                            card.classList.add('visible');
+                        }, i * 200);
+                    });
+                    reasonObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        var reasonSection = document.querySelector('.reason-cards');
+        if (reasonSection) reasonObserver.observe(reasonSection);
 
         // ヘッダースクロール効果
         var header = document.getElementById('header');
