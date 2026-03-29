@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>無料セミナー：若手診断士のためのAI研修サービス入門｜株式会社エバーグリーンタイム</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a2e5a;
+            --primary-light: #2c4a8a;
+            --accent: #e63946;
+            --accent-light: #ff6b6b;
+            --gold: #f4a261;
+            --blue-gradient: linear-gradient(135deg, #1a2e5a 0%, #2c4a8a 50%, #3a5fad 100%);
+            --text: #333;
+            --text-light: #666;
+            --bg-light: #f7f8fc;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           ユーティリティ
+        ============================================ */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, #ffd6d6 60%);
+            padding: 0 2px;
+            font-weight: 700;
+        }
+
+        .marker-yellow {
+            background: linear-gradient(transparent 60%, #fff3b0 60%);
+            padding: 0 2px;
+            font-weight: 700;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 700;
+            padding: 4px 20px;
+            border-radius: 2px;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 48px;
+            line-height: 1.9;
+        }
+
+        .text-center { text-align: center; }
+
+        .btn-cta {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            padding: 20px 48px;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.35);
+            animation: pulse-shadow 2s ease-in-out infinite;
+        }
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(230, 57, 70, 0.45);
+        }
+        .btn-cta .btn-sub {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+        @keyframes pulse-shadow {
+            0%, 100% { box-shadow: 0 4px 20px rgba(230, 57, 70, 0.35); }
+            50% { box-shadow: 0 4px 30px rgba(230, 57, 70, 0.55); }
+        }
+
+        /* ============================================
+           固定ヘッダー
+        ============================================ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(26, 46, 90, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 12px 0;
+            transition: all 0.3s ease;
+        }
+        .header.scrolled {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+        .header-logo img {
+            height: 40px;
+            width: auto;
+        }
+        .header-cta {
+            background: var(--accent);
+            color: var(--white);
+            padding: 10px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .header-cta:hover { background: #cf2f3d; }
+
+        /* ============================================
+           ファーストビュー
+        ============================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&q=80') center center / cover no-repeat;
+            z-index: 0;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26,46,90,0.92) 0%, rgba(44,74,138,0.85) 60%, rgba(58,95,173,0.80) 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 140px 0 80px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--white);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 28px;
+            backdrop-filter: blur(4px);
+        }
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .hero-copy {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: 3px;
+        }
+        .hero h1 {
+            color: var(--white);
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+        .hero h1 .gold { color: var(--gold); }
+        .hero-desc {
+            color: rgba(255,255,255,0.85);
+            font-size: 17px;
+            line-height: 2;
+            margin-bottom: 40px;
+            max-width: 640px;
+        }
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+        .hero-meta-item .check {
+            color: #4caf50;
+            font-weight: 700;
+        }
+
+
+        /* ============================================
+           悩み・問題提起
+        ============================================ */
+        .problems {
+            background: var(--bg-light);
+            padding: 100px 0;
+        }
+        .problems-list {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .problem-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px dashed #ddd;
+            font-size: 17px;
+        }
+        .problem-item:last-child { border-bottom: none; }
+        .problem-check {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           第1章：なぜ今、経営×AIなのか
+        ============================================ */
+        .chapter-why {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .timeline {
+            max-width: 720px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary-light), var(--accent));
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 64px;
+            margin-bottom: 48px;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot {
+            position: absolute;
+            left: 12px;
+            top: 4px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 3px var(--primary-light);
+            z-index: 1;
+        }
+        .timeline-item:last-child .timeline-dot {
+            background: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+        .timeline-item h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .timeline-item:last-child h3 { color: var(--accent); }
+        .timeline-item p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.9;
+        }
+
+        /* 危機感ボックス */
+        .crisis-box {
+            max-width: 720px;
+            margin: 56px auto 0;
+            background: #fff8f8;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        .crisis-box::before {
+            content: '!';
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 20px;
+            line-height: 36px;
+        }
+        .crisis-box p {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           第2章：希望（診断士×AIの相性）
+        ============================================ */
+        .chapter-hope {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+        .formula-wrap {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 56px;
+            flex-wrap: wrap;
+        }
+        .formula-card {
+            flex: 1;
+            min-width: 220px;
+            max-width: 300px;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+        .formula-card .f-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        .formula-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        .formula-card p { font-size: 13px; color: var(--text-light); }
+        .formula-card.result {
+            border: 2px solid var(--primary);
+            background: linear-gradient(180deg, #f0f4ff, var(--white));
+        }
+        .formula-op {
+            display: flex;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary-light);
+        }
+
+        .reason-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 56px;
+        }
+        .reason-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 32px 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+        .reason-card:hover { transform: translateY(-4px); }
+        .reason-card h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .reason-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* 希望メッセージ */
+        .hope-message {
+            background: var(--blue-gradient);
+            border-radius: 12px;
+            padding: 48px;
+            text-align: center;
+            color: var(--white);
+        }
+        .hope-message p {
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1.8;
+        }
+        .hope-message .sub {
+            font-size: 15px;
+            font-weight: 400;
+            opacity: 0.8;
+            margin-top: 16px;
+        }
+
+        /* ============================================
+           副業・独立セクション
+        ============================================ */
+        .chapter-side {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .side-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .side-text h2 {
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .side-text p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        .side-benefits {
+            list-style: none;
+        }
+        .side-benefits li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 15px;
+            color: var(--text);
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .side-benefits li:last-child { border-bottom: none; }
+        .side-benefits .b-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+        .side-visual {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+        .side-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .side-step:last-child { margin-bottom: 0; }
+        .side-step-num {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .side-step-content h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2px;
+        }
+        .side-step-content p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .side-step-arrow {
+            text-align: center;
+            color: var(--primary-light);
+            font-size: 20px;
+            margin: 4px 0 4px 20px;
+        }
+
+        /* ============================================
+           セミナー内容
+        ============================================ */
+        .chapter-content {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+        .content-grid {
+            max-width: 760px;
+            margin: 0 auto;
+            counter-reset: content-counter;
+        }
+        .content-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            counter-increment: content-counter;
+            transition: transform 0.3s ease;
+        }
+        .content-item:hover { transform: translateX(4px); }
+        .content-num {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .content-item p {
+            font-size: 16px;
+            padding-top: 8px;
+        }
+
+        /* ============================================
+           登壇者
+        ============================================ */
+        .chapter-speaker {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .speaker-card {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            max-width: 760px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 48px;
+        }
+        .speaker-photo {
+            flex-shrink: 0;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .speaker-info h3 {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .speaker-info .s-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .speaker-info .s-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.9;
+        }
+        .speaker-highlights {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .speaker-tag {
+            display: inline-block;
+            background: var(--bg-light);
+            border: 1px solid #dde3f0;
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.4;
+        }
+        .speaker-tag .tag-num {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        /* ============================================
+           中間CTA
+        ============================================ */
+        .mid-cta {
+            padding: 80px 0;
+            background: var(--blue-gradient);
+            text-align: center;
+            color: var(--white);
+        }
+        .mid-cta h2 {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+        .mid-cta p {
+            font-size: 16px;
+            opacity: 0.85;
+            margin-bottom: 32px;
+        }
+
+        /* ============================================
+           申し込みフォーム
+        ============================================ */
+        .form-section {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+        .form-outer {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 48px 40px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+        }
+        .form-group { margin-bottom: 24px; }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .form-group label .req {
+            color: var(--accent);
+            font-size: 12px;
+            margin-left: 4px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+            background: #fafafa;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+        }
+        .form-group textarea { height: 100px; resize: vertical; }
+        .form-submit {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.3);
+        }
+        .form-submit:hover {
+            background: #cf2f3d;
+            transform: translateY(-2px);
+        }
+        .form-note {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 16px;
+        }
+
+        /* ============================================
+           フッター
+        ============================================ */
+        footer {
+            background: #0f1b33;
+            color: var(--white);
+            padding: 60px 0 24px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-section h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: rgba(255,255,255,0.9);
+        }
+        .footer-section p,
+        .footer-section a {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            line-height: 2;
+            display: block;
+        }
+        .footer-section a:hover { color: var(--gold); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* ============================================
+           レスポンシブ
+        ============================================ */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 30px; }
+            .hero-copy { font-size: 15px; }
+            .hero-desc { font-size: 15px; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+            .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
+            .hero-stat .num { font-size: 36px; }
+
+            .section-title { font-size: 24px; }
+
+            .formula-wrap { flex-direction: column; align-items: center; }
+            .formula-op { transform: rotate(90deg); font-size: 24px; }
+            .formula-card { max-width: 100%; }
+
+            .reason-cards { grid-template-columns: 1fr; }
+
+            .side-layout { grid-template-columns: 1fr; }
+
+            .speaker-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-grid { grid-template-columns: 1fr; }
+
+            .form-card { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ヘッダー -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <div class="header-logo"><img src="ai_cmc_logo.png" alt="AI-CMC｜企業のAI推進を、中小企業診断士とともに"></div>
+            <a href="#form" class="header-cta">無料で参加する</a>
+        </div>
+    </header>
+
+    <!-- ============================================
+         ファーストビュー
+    ============================================ -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                参加費無料｜オンライン開催｜アーカイブ配信あり
+            </div>
+            <p class="hero-copy">中小企業診断士のための無料セミナー</p>
+            <h1>経営の未来は、<br><span class="gold">AIを扱える診断士</span>が<br>切り拓く。</h1>
+            <p class="hero-desc">いま、経営支援の現場に大きな地殻変動が起きています。<br>
+            AIの本質を理解し、経営に活かせる診断士になるための第一歩を、<br>この無料セミナーで踏み出しませんか。</p>
+            <a href="#form" class="btn-cta">
+                無料セミナーに申し込む
+                <span class="btn-sub">約60分｜途中参加・途中退出OK</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================
+         悩み・問題提起
+    ============================================ -->
+    <section class="problems">
+        <div class="container text-center">
+            <span class="section-label">PROBLEM</span>
+            <h2 class="section-title fade-in">こんなお悩みはありませんか？</h2>
+            <div class="problems-list">
+                <div class="problem-item fade-in">
+                    <div class="problem-check">&#10003;</div>
+                    <p>クライアントから「AIを使って何かできない？」と聞かれて、<span class="marker">うまく答えられなかった</span></p>
+                </div>
+                <div class="problem-item fade-in">
+                    <div class="problem-check">&#10003;</div>
+                    <p>AIツールは触ったことがあるが、<span class="marker">経営支援にどう活かすか</span>が見えない</p>
+                </div>
+                <div class="problem-item fade-in">
+                    <div class="problem-check">&#10003;</div>
+                    <p>周りの診断士がAIを使い始めていて、<span class="marker">取り残される不安</span>を感じている</p>
+                </div>
+                <div class="problem-item fade-in">
+                    <div class="problem-check">&#10003;</div>
+                    <p>企業内診断士として働いているが、<span class="marker">将来の独立に向けて武器が欲しい</span></p>
+                </div>
+                <div class="problem-item fade-in">
+                    <div class="problem-check">&#10003;</div>
+                    <p>AIの情報は溢れているが、<span class="marker">診断士視点で体系的に学べる場</span>がない</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         第1章：なぜ今、経営×AIなのか
+    ============================================ -->
+    <section class="chapter-why">
+        <div class="container text-center">
+            <span class="section-label">CHAPTER 01</span>
+            <h2 class="section-title fade-in">なぜ今、診断士がAIを<br>学ぶべきなのか</h2>
+            <p class="section-subtitle fade-in">経営環境は静かに、しかし確実に変わり始めています。<br>その変化の中心にあるのが、生成AIです。</p>
+
+            <div class="timeline">
+                <div class="timeline-item fade-in-left">
+                    <div class="timeline-dot"></div>
+                    <h3>経営（マネジメント）にこそ、<br>AIの知見が必要になった</h3>
+                    <p>生成AIの進化は、単なるIT業界の話ではありません。事業戦略の策定、マーケティング、人材配置、財務分析――経営のあらゆる意思決定にAIが関与し始めています。AIを理解していない経営支援は、もはや「片手落ち」になりつつあります。</p>
+                </div>
+                <div class="timeline-item fade-in-left">
+                    <div class="timeline-dot"></div>
+                    <h3>AIを活用する企業としない企業で、<br>経営力に大きな格差が生じる</h3>
+                    <p>すでにAIを導入した中小企業では、業務効率が2〜5倍に向上した事例が続出しています。この流れは加速こそすれ、止まることはありません。経営者がAIの可能性を理解しているかどうかが、企業の成長を左右する時代が到来しています。</p>
+                </div>
+                <div class="timeline-item fade-in-left">
+                    <div class="timeline-dot"></div>
+                    <h3>つまり、AIを扱える診断士と<br>そうでない診断士の間に、<br>さらに大きな格差が生まれる</h3>
+                    <p>経営者にAI活用を提案できる診断士は、圧倒的な付加価値を提供できます。一方、AIに関する知見がなければ、経営者からの信頼は次第に失われていきます。この格差は、時間が経つほど取り返しがつかなくなります。</p>
+                </div>
+            </div>
+
+            <div class="crisis-box fade-in">
+                <p>「AIがわからない診断士」は<br>近い将来、選ばれなくなる。<br>この現実に、あなたはどう向き合いますか？</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         第2章：希望（診断士×AIの相性）
+    ============================================ -->
+    <section class="chapter-hope">
+        <div class="container text-center">
+            <span class="section-label">CHAPTER 02</span>
+            <h2 class="section-title fade-in">しかし、ここに大きな希望がある</h2>
+            <p class="section-subtitle fade-in">実は、あらゆる専門家の中で<span class="marker-yellow">中小企業診断士はAIとの相性が最も良い</span>職種です。<br>なぜなら、AIの本質的な性質が診断士のスキルセットと完全に合致するからです。</p>
+
+            <div class="formula-wrap fade-in">
+                <div class="formula-card">
+                    <div class="f-icon">&#x1F9E0;</div>
+                    <h4>人間のイシュー設定力<br>&#xD7; 思考の深さ</h4>
+                    <p>診断士が持つ<br>経営課題の本質を見抜く力</p>
+                </div>
+                <div class="formula-op">&#xD7;</div>
+                <div class="formula-card">
+                    <div class="f-icon">&#x1F916;</div>
+                    <h4>AIの処理・生成能力</h4>
+                    <p>大量データの分析<br>多角的なアウトプット生成</p>
+                </div>
+                <div class="formula-op">=</div>
+                <div class="formula-card result">
+                    <div class="f-icon">&#x1F680;</div>
+                    <h4>アウトプットの<br>飛躍的向上</h4>
+                    <p>人間の思考力に比例して<br>成果が倍増する</p>
+                </div>
+            </div>
+
+            <div class="reason-cards">
+                <div class="reason-card fade-in">
+                    <h4>診断士の「多面的思考」がAIを最大化する</h4>
+                    <p>財務・マーケ・HR・オペレーション――多角的に経営を捉える訓練を積んだ診断士だからこそ、AIに「正しい問い」を立て、質の高い答えを引き出せます。</p>
+                </div>
+                <div class="reason-card fade-in">
+                    <h4>「イシューの質」がAIの成果を決める</h4>
+                    <p>AIは問いの質に比例して出力の質が変わります。経営課題を構造化し本質的なイシューを設定できる診断士は、AI活用において最もレバレッジが効く存在です。</p>
+                </div>
+                <div class="reason-card fade-in">
+                    <h4>「現場感」がAIの弱点を補完する</h4>
+                    <p>「この社長は何を求めているか」「この組織で通る施策か」――AIには持てない現場のリアルと組み合わさった時、唯一無二の価値が生まれます。</p>
+                </div>
+            </div>
+
+            <div class="hope-message fade-in">
+                <p>AIは、人間の「思考力」と「問いの質」に比例して<br>アウトプットを飛躍的に向上させる。<br>だからこそ、<span style="color: var(--gold);">診断士&#xD7;AIは最強の組み合わせ</span>になる。</p>
+                <p class="sub">この可能性をどう現実にするか――そのための第一歩が、この無料セミナーです。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         副業・独立セクション
+    ============================================ -->
+    <section class="chapter-side">
+        <div class="container">
+            <div class="side-layout">
+                <div class="side-text fade-in-left">
+                    <span class="section-label">CAREER</span>
+                    <h2>AI案件は、独立を目指す<br>企業内診断士の<br><span style="color: var(--accent);">副業にも最適</span></h2>
+                    <p>将来的な独立を志向する企業内診断士にとって、AI関連案件は<span class="marker">理想的な副業</span>です。本業で培った経営知識にAIスキルを掛け合わせることで、週末や空き時間でも高単価な案件に取り組めます。</p>
+                    <ul class="side-benefits">
+                        <li>
+                            <span class="b-icon">&#10003;</span>
+                            <span><strong>リモート完結</strong> ── オンラインで完結する案件が多く、本業との両立がしやすい</span>
+                        </li>
+                        <li>
+                            <span class="b-icon">&#10003;</span>
+                            <span><strong>高単価</strong> ── AI×経営の専門性は希少価値が高く、一般的な診断士案件より報酬が高い</span>
+                        </li>
+                        <li>
+                            <span class="b-icon">&#10003;</span>
+                            <span><strong>独立への実績作り</strong> ── 副業で実績と人脈を築き、独立時のクライアント基盤にできる</span>
+                        </li>
+                        <li>
+                            <span class="b-icon">&#10003;</span>
+                            <span><strong>案件斡旋あり</strong> ── 研修修了後はコミュニティ経由でAI案件の斡旋を受けられる</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="side-visual fade-in-right">
+                    <div class="side-step">
+                        <div class="side-step-num">1</div>
+                        <div class="side-step-content">
+                            <h4>AI研修を受講</h4>
+                            <p>診断士向けに最適化されたカリキュラム</p>
+                        </div>
+                    </div>
+                    <div class="side-step-arrow">&#x25BC;</div>
+                    <div class="side-step">
+                        <div class="side-step-num">2</div>
+                        <div class="side-step-content">
+                            <h4>コミュニティに参加</h4>
+                            <p>仲間と学び合い、スキルを磨く</p>
+                        </div>
+                    </div>
+                    <div class="side-step-arrow">&#x25BC;</div>
+                    <div class="side-step">
+                        <div class="side-step-num">3</div>
+                        <div class="side-step-content">
+                            <h4>副業でAI案件を受注</h4>
+                            <p>斡旋システムで案件を獲得</p>
+                        </div>
+                    </div>
+                    <div class="side-step-arrow">&#x25BC;</div>
+                    <div class="side-step">
+                        <div class="side-step-num">4</div>
+                        <div class="side-step-content">
+                            <h4>実績を積んで独立へ</h4>
+                            <p>クライアント基盤と専門性を武器に</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 中間CTA -->
+    <section class="mid-cta">
+        <div class="container fade-in">
+            <h2>まずは無料セミナーで、その全体像を掴む</h2>
+            <p>研修内容・コミュニティ・案件斡旋の仕組みを60分で解説します</p>
+            <a href="#form" class="btn-cta" style="background: var(--white); color: var(--primary);">
+                無料セミナーに申し込む
+                <span class="btn-sub" style="color: var(--text-light);">参加費無料｜オンライン開催</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================
+         セミナー内容
+    ============================================ -->
+    <section class="chapter-content">
+        <div class="container text-center">
+            <span class="section-label">PROGRAM</span>
+            <h2 class="section-title fade-in">セミナー内容</h2>
+            <p class="section-subtitle fade-in">60分で「診断士&#xD7;AI」の全体像を掴み、明日から動き出せる状態を目指します。</p>
+            <div class="content-grid">
+                <div class="content-item fade-in">
+                    <div class="content-num">01</div>
+                    <p>なぜ「経営&#xD7;AI」なのか？ ── 経営支援の現場で起きている地殻変動</p>
+                </div>
+                <div class="content-item fade-in">
+                    <div class="content-num">02</div>
+                    <p>診断士&#xD7;AIの圧倒的な相性の良さ ── 思考力がAIの成果を決める理由</p>
+                </div>
+                <div class="content-item fade-in">
+                    <div class="content-num">03</div>
+                    <p>AI研修サービスの全体像 ── 何を、どのように学べるのか</p>
+                </div>
+                <div class="content-item fade-in">
+                    <div class="content-num">04</div>
+                    <p>デモンストレーション ── 診断業務におけるAI活用の実例</p>
+                </div>
+                <div class="content-item fade-in">
+                    <div class="content-num">05</div>
+                    <p>受講者限定コミュニティと案件斡旋 ── 副業・独立への道筋</p>
+                </div>
+                <div class="content-item fade-in">
+                    <div class="content-num">06</div>
+                    <p>質疑応答 ── あなたのAI活用に関する疑問にお答えします</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         登壇者
+    ============================================ -->
+    <section class="chapter-speaker">
+        <div class="container text-center">
+            <span class="section-label">SPEAKER</span>
+            <h2 class="section-title fade-in">登壇者</h2>
+            <div class="speaker-card fade-in">
+                <img class="speaker-photo" src="speaker_tanase.png" alt="棚瀬博之">
+                <div class="speaker-info" style="text-align: left;">
+                    <h3>棚瀬 博之</h3>
+                    <p class="s-title">株式会社エバーグリーンタイム 代表取締役／中小企業診断士</p>
+                    <p class="s-desc">中小企業のDX支援で<strong>120社以上</strong>の実績を持つ中小企業診断士。近年は生成AI研修・AI推進コンサルティングに注力し、<span class="marker">上場企業や大手会計事務所を含む20社以上</span>に提供。自身もノンエンジニアでありながら、Claude Code等の生成AIツールを駆使して<span class="marker-yellow">AIマネジメントチームを組織</span>し、「AI経営」を自ら実践中。机上の理論ではなく、経営者自身がAIを使いこなすリアルな知見をお伝えします。</p>
+                    <div class="speaker-highlights">
+                        <div class="speaker-tag">DX支援 <span class="tag-num">120</span>社+</div>
+                        <div class="speaker-tag">生成AI研修 <span class="tag-num">20</span>社+</div>
+                        <div class="speaker-tag">自らAI経営を実践</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         申し込みフォーム
+    ============================================ -->
+    <section class="form-section" id="form">
+        <div class="container text-center">
+            <span class="section-label" style="background: var(--accent);">ENTRY</span>
+            <h2 class="section-title fade-in" style="color: var(--primary);">無料セミナーに申し込む</h2>
+            <p class="section-subtitle fade-in">参加費無料｜オンライン開催｜所要時間 約60分</p>
+            <div class="form-outer">
+                <div class="form-card fade-in">
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label>お名前 <span class="req">必須</span></label>
+                            <input type="text" name="name" required placeholder="例：田中 太郎">
+                        </div>
+                        <div class="form-group">
+                            <label>メールアドレス <span class="req">必須</span></label>
+                            <input type="email" name="email" required placeholder="例：tanaka@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>電話番号</label>
+                            <input type="tel" name="phone" placeholder="例：090-1234-5678">
+                        </div>
+                        <div class="form-group">
+                            <label>診断士としての経験年数</label>
+                            <select name="experience">
+                                <option value="">選択してください</option>
+                                <option value="未登録">未登録（勉強中）</option>
+                                <option value="1-3">1-3年</option>
+                                <option value="4-7">4-7年</option>
+                                <option value="8-10">8-10年</option>
+                                <option value="11+">11年以上</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>現在のお立場</label>
+                            <select name="position">
+                                <option value="">選択してください</option>
+                                <option value="企業内診断士">企業内診断士</option>
+                                <option value="独立診断士">独立診断士</option>
+                                <option value="勉強中">診断士を目指して勉強中</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>セミナーで聞きたいこと</label>
+                            <textarea name="interest" placeholder="例：AIツールの具体的な使い方を知りたい、副業としての案件獲得方法が気になる、など"></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">無料セミナーに申し込む</button>
+                        <p class="form-note">※ お申し込み後、ご登録メールアドレスに参加URLをお送りします。</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         フッター
+    ============================================ -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <img src="ai_cmc_logo.png" alt="AI-CMC" style="height: 56px; width: auto; margin-bottom: 12px; filter: brightness(0) invert(1);">
+                    <p>中小企業診断士向けAI研修サービスのパイオニア。<br>研修 &#xD7; コミュニティ &#xD7; 案件斡旋で、<br>診断士の新たな可能性を切り拓きます。</p>
+                </div>
+                <div class="footer-section">
+                    <h4>お問い合わせ</h4>
+                    <p>Email: info@evergreen-time.co.jp</p>
+                    <p>Tel: 06-XXXX-XXXX</p>
+                    <p>大阪府大阪市中央区</p>
+                </div>
+                <div class="footer-section">
+                    <h4>サービス</h4>
+                    <a href="#">AI研修サービス</a>
+                    <a href="#">診断士コミュニティ</a>
+                    <a href="#">AI案件斡旋</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 株式会社エバーグリーンタイム All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JavaScript
+    ============================================ -->
+    <script>
+    (function() {
+        // スクロールアニメーション（Intersection Observer）
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(function(el) {
+            observer.observe(el);
+        });
+
+        // ヘッダースクロール効果
+        var header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // スムーススクロール（固定ヘッダー分のオフセット）
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    var offset = header.offsetHeight + 20;
+                    var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                }
+            });
+        });
+    })();
+    </script>
+</body>
+</html>
