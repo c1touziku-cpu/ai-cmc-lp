@@ -406,8 +406,7 @@
         ============================================ */
         .chapter-hope {
             padding: 100px 0;
-            background: var(--primary);
-            color: var(--white);
+            background: linear-gradient(180deg, #eef3fb 0%, #f8f6f0 50%, #fdf9ef 100%);
             position: relative;
             overflow: hidden;
         }
@@ -415,13 +414,10 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 20% 50%, rgba(58,95,173,0.4) 0%, transparent 60%),
-                        radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.15) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 20% 50%, rgba(58,95,173,0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.08) 0%, transparent 60%);
             pointer-events: none;
         }
-        .chapter-hope .section-title { color: var(--white); }
-        .chapter-hope .section-subtitle { color: rgba(255,255,255,0.9); }
-        .chapter-hope .section-label { background: rgba(255,255,255,0.15); color: var(--white); }
 
         /* 数式エリア */
         .formula-wrap {
@@ -437,51 +433,47 @@
             flex: 1;
             min-width: 220px;
             max-width: 300px;
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: var(--white);
             border-radius: 16px;
             padding: 36px 24px;
             text-align: center;
+            box-shadow: 0 8px 32px rgba(26,46,90,0.1);
+            border: 1px solid rgba(26,46,90,0.08);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
         .formula-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 16px 48px rgba(26,46,90,0.18);
         }
         .formula-card .f-icon {
-            width: 72px;
-            height: 72px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto 20px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 64px;
         }
         .formula-card h4 {
             font-size: 17px;
             font-weight: 700;
-            color: var(--white);
+            color: var(--primary);
             margin-bottom: 10px;
             line-height: 1.5;
         }
-        .formula-card p { font-size: 13px; color: rgba(255,255,255,0.7); }
+        .formula-card p { font-size: 13px; color: var(--text-light); }
         .formula-card.result {
-            background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(212,175,55,0.08));
-            border: 1px solid rgba(212,175,55,0.5);
+            background: linear-gradient(135deg, #fffbeb, #fff8e1);
+            border: 2px solid var(--gold);
         }
-        .formula-card.result h4 { color: var(--gold); }
+        .formula-card.result h4 { color: #b8860b; }
         .formula-op {
             display: flex;
             align-items: center;
             font-family: 'Poppins', sans-serif;
             font-size: 36px;
             font-weight: 800;
-            color: var(--gold);
-            text-shadow: 0 0 20px rgba(212,175,55,0.4);
+            color: var(--primary);
         }
 
         /* 理由カード */
@@ -493,11 +485,11 @@
             counter-reset: reason;
         }
         .reason-card {
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: var(--white);
             border-radius: 16px;
             padding: 40px 28px 32px;
+            box-shadow: 0 8px 32px rgba(26,46,90,0.1);
+            border: 1px solid rgba(26,46,90,0.08);
             position: relative;
             transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
             counter-increment: reason;
@@ -510,7 +502,7 @@
         }
         .reason-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+            box-shadow: 0 16px 48px rgba(26,46,90,0.18);
             border-color: var(--gold);
         }
         .reason-card::before {
@@ -522,26 +514,25 @@
             font-size: 40px;
             font-weight: 800;
             color: var(--gold);
-            opacity: 0.5;
+            opacity: 0.6;
             line-height: 1;
         }
         .reason-card h4 {
             font-size: 18px;
             font-weight: 700;
-            color: var(--white);
+            color: var(--primary);
             margin-bottom: 14px;
             line-height: 1.6;
         }
         .reason-card p {
             font-size: 14px;
-            color: rgba(255,255,255,0.75);
+            color: var(--text-light);
             line-height: 1.8;
         }
 
         /* 希望メッセージ */
         .hope-message {
-            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05));
-            border: 1px solid rgba(212,175,55,0.4);
+            background: var(--blue-gradient);
             border-radius: 16px;
             padding: 52px;
             text-align: center;
@@ -556,7 +547,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 50%);
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 50%);
             animation: hopePulse 4s ease-in-out infinite;
         }
         @keyframes hopePulse {
