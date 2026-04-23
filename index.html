@@ -972,7 +972,7 @@
             今このスキルを身につけた診断士から、<br>案件の質と単価が変わり始めています。</p>
             <a href="#form" class="btn-cta">
                 無料セミナーに申し込む
-                <span class="btn-sub">約90分｜途中参加・途中退出OK</span>
+                <span class="btn-sub">約90分</span>
             </a>
         </div>
     </section>
@@ -1091,8 +1091,116 @@
                 <p>AIは、人間の「思考力」と「問いの質」に比例して<br>アウトプットを飛躍的に向上させる。<br>だからこそ、<span style="color: var(--gold);">診断士&#xD7;AIは最強の組み合わせ</span>になる。</p>
                 <p class="sub">この可能性をどう現実にするか――そのための第一歩が、この無料セミナーです。</p>
             </div>
+
         </div>
     </section>
+
+    <!-- AI案件事例ブロック（独立セクション） -->
+    <section class="ai-cases-section">
+        <div class="container">
+            <p class="ai-cases-eyebrow">WHAT YOU CAN OFFER</p>
+            <h2 class="ai-cases-title">診断士が提供できる<br><span>"AI案件"</span>の事例</h2>
+            <div class="ai-cases-grid">
+                <div class="ai-case-card fade-in">
+                    <div class="ai-case-accent" style="background:#1a2e5a;"></div>
+                    <div class="ai-case-icon">🔍</div>
+                    <h4>企業向けAI診断サービス</h4>
+                    <p>業務フローを分解し、AI導入の優先順位・費用対効果を経営目線で可視化。「どこから始めるか」を明示できるのは、診断士だけ。</p>
+                </div>
+                <div class="ai-case-card fade-in">
+                    <div class="ai-case-accent" style="background:#e63946;"></div>
+                    <div class="ai-case-icon">📋</div>
+                    <h4>助成金活用・生成AI研修</h4>
+                    <p>経営課題を起点にカリキュラムを設計するから、現場で使えるAI活用スキルが身につく。「研修で終わらせない」診断士ならではのアプローチ。</p>
+                </div>
+                <div class="ai-case-card fade-in">
+                    <div class="ai-case-accent" style="background:#2c4a8a;"></div>
+                    <div class="ai-case-icon">🤝</div>
+                    <h4>生成AI活用 伴走コンサル</h4>
+                    <p>ツール導入で終わらせない。経営課題の本質から逆算し、AI活用を組織に根付かせる中長期の伴走支援。診断士の真骨頂。</p>
+                </div>
+                <div class="ai-case-card fade-in">
+                    <div class="ai-case-accent" style="background:#f4a261;"></div>
+                    <div class="ai-case-icon">📈</div>
+                    <h4>M&amp;A 磨き上げ・PMI支援</h4>
+                    <p>売却前の企業価値向上から、M&amp;A後の経営統合まで。AIで業務分析・文書整理を高速化し、診断士の価値をフェーズ全体に拡張。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+    .ai-cases-section {
+        padding: 100px 0;
+        background: #f0f4fa;
+    }
+    .ai-cases-eyebrow {
+        text-align: center;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        color: #e63946;
+        margin-bottom: 12px;
+    }
+    .ai-cases-title {
+        text-align: center;
+        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+        font-weight: 800;
+        color: #1a2e5a;
+        line-height: 1.5;
+        margin-bottom: 56px;
+    }
+    .ai-cases-title span {
+        color: #e63946;
+    }
+    .ai-cases-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        max-width: 860px;
+        margin: 0 auto;
+    }
+    @media (max-width: 640px) {
+        .ai-cases-grid { grid-template-columns: 1fr; }
+    }
+    .ai-case-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 36px 28px 32px;
+        box-shadow: 0 4px 24px rgba(26,46,90,0.08);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ai-case-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 40px rgba(26,46,90,0.14);
+    }
+    .ai-case-accent {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 5px;
+        border-radius: 16px 16px 0 0;
+    }
+    .ai-case-icon {
+        font-size: 2.4rem;
+        margin-bottom: 16px;
+        display: block;
+    }
+    .ai-case-card h4 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #1a2e5a;
+        margin-bottom: 12px;
+        line-height: 1.4;
+    }
+    .ai-case-card p {
+        font-size: 0.9rem;
+        color: #555;
+        line-height: 1.85;
+        margin: 0;
+    }
+    </style>
 
     <!-- ============================================
          副業・独立セクション
@@ -1119,7 +1227,7 @@
                         </li>
                         <li>
                             <span class="b-icon">&#10003;</span>
-                            <span><strong>案件斡旋あり</strong> ── 研修修了後はコミュニティ経由でAI案件の斡旋を受けられる</span>
+                            <span><strong>スキルの掛け算</strong> ── 本業の経営知識×AIスキルで、市場価値の高い診断士へ</span>
                         </li>
                     </ul>
                 </div>
@@ -1144,7 +1252,7 @@
                         <div class="side-step-num">3</div>
                         <div class="side-step-content">
                             <h4>副業でAI案件を受注</h4>
-                            <p>斡旋システムで案件を獲得</p>
+                            <p>身につけたスキルで案件を獲得</p>
                         </div>
                     </div>
                     <div class="side-step-arrow">&#x25BC;</div>
@@ -1163,8 +1271,8 @@
     <!-- 中間CTA -->
     <section class="mid-cta">
         <div class="container fade-in">
-            <h2>まずは無料セミナーで、その全体像を掴む</h2>
-            <p>研修内容・コミュニティ・案件斡旋の仕組みを90分で解説します</p>
+            <h2>まずは無料セミナーで、可能性を体感する</h2>
+            <p>AI×診断士のポテンシャルと支援事例を90分でお伝えします</p>
             <a href="#form" class="btn-cta" style="background: var(--white); color: var(--primary);">
                 無料セミナーに申し込む
                 <span class="btn-sub" style="color: var(--text-light);">参加費無料｜オンライン開催</span>
@@ -1191,7 +1299,7 @@
                 </div>
                 <div class="content-item fade-in">
                     <div class="content-num">03</div>
-                    <p>AI研修サービスの全体像 ── 何を、どのように学べるのか</p>
+                    <p>AI活用の実践ステップ ── 明日から何を始めればいいのか</p>
                 </div>
                 <div class="content-item fade-in">
                     <div class="content-num">04</div>
@@ -1199,7 +1307,7 @@
                 </div>
                 <div class="content-item fade-in">
                     <div class="content-num">05</div>
-                    <p>受講者限定コミュニティと案件斡旋 ── AI支援案件の獲得</p>
+                    <p>受講者限定コミュニティ ── 仲間と学び合う環境</p>
                 </div>
                 <div class="content-item fade-in">
                     <div class="content-num">06</div>
@@ -1259,10 +1367,11 @@
                             <label>参加希望日程 <span class="req">必須</span></label>
                             <select name="date" required>
                                 <option value="">選択してください</option>
-                                <option value="2026-04-22">4/22（水）13:00 - 14:30</option>
-                                <option value="2026-04-27">4/27（火）18:00 - 19:30</option>
+                                <option value="2026-04-27">4/27（月）18:00 - 19:30</option>
                                 <option value="2026-05-12">5/12（火）18:00 - 19:30</option>
                                 <option value="2026-05-13">5/13（水）13:00 - 14:30</option>
+                                <option value="2026-05-19">5/19（火）13:00 - 14:30</option>
+                                <option value="2026-05-22">5/22（金）18:00 - 19:30</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1311,7 +1420,7 @@
                 <div class="footer-section">
                     <img src="egt_logo.png" alt="株式会社エバーグリーンタイム" style="height: 48px; width: auto; margin-bottom: 8px;">
                     <p style="font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 12px;">主催：株式会社エバーグリーンタイム</p>
-                    <p>中小企業診断士向けAI研修サービスのパイオニア。<br>研修 &#xD7; コミュニティ &#xD7; 案件斡旋で、<br>診断士の新たな可能性を切り拓きます。</p>
+                    <p>中小企業診断士向けAI研修サービスのパイオニア。<br>研修 &#xD7; コミュニティで、<br>診断士の新たな可能性を切り拓きます。</p>
                 </div>
                 <div class="footer-section">
                     <h4>お問い合わせ</h4>
@@ -1395,6 +1504,23 @@
                 }
             });
         });
+        // 開催日当日以降の日程選択肢を自動的に非表示化（JST基準）
+        (function removePastDateOptions() {
+            var nowJst = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+            var yyyy = nowJst.getFullYear();
+            var mm = String(nowJst.getMonth() + 1).padStart(2, '0');
+            var dd = String(nowJst.getDate()).padStart(2, '0');
+            var todayStr = yyyy + '-' + mm + '-' + dd;
+            var select = document.querySelector('select[name="date"]');
+            if (!select) return;
+            Array.prototype.slice.call(select.options).forEach(function(opt) {
+                // value が YYYY-MM-DD 形式で、当日以前なら選択肢から除外
+                if (opt.value && /^\d{4}-\d{2}-\d{2}$/.test(opt.value) && opt.value <= todayStr) {
+                    opt.remove();
+                }
+            });
+        })();
+
         // フォーム送信処理
         var GAS_URL = 'https://script.google.com/macros/s/AKfycbyyHHrTLAkTcre6Ow4c-t8gL0vAH4uNgrC-PI3ysQgNBkiTdVtHSGJyjrmwBvxGo6K4/exec';
 
@@ -1409,6 +1535,7 @@
                 btn.disabled = true;
                 btn.style.opacity = '0.6';
 
+                var urlParams = new URLSearchParams(window.location.search);
                 var formData = {
                     name: form.querySelector('[name="name"]').value,
                     email: form.querySelector('[name="email"]').value,
@@ -1416,7 +1543,10 @@
                     date: form.querySelector('[name="date"]').value,
                     experience: form.querySelector('[name="experience"]').value,
                     position: form.querySelector('[name="position"]').value,
-                    interest: form.querySelector('[name="interest"]').value
+                    interest: form.querySelector('[name="interest"]').value,
+                    utm_source: urlParams.get('utm_source') || '',
+                    utm_campaign: urlParams.get('utm_campaign') || '',
+                    utm_content: urlParams.get('utm_content') || ''
                 };
 
                 fetch(GAS_URL, {
